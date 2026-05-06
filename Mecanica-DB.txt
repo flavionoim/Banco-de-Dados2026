@@ -1,66 +1,65 @@
 CREATE TABLE mecanico 
 ( 
- nome_mec VARCHAR(255) not null,  
- id_mec INT PRIMARY KEY AUTO_INCREMENT not null,  
- telefone_mec VARCHAR(20) not null,  
- data_admissao_mec DATE not null,  
- cpf VARCHAR(20) unique not null,
- email VARCHAR(100) unique not null); 
+ nome_mec VARCHAR(255) NOT NULL,  
+ id_mec INT PRIMARY KEY AUTO_INCREMENT NOT NULL,  
+ telefone_mec VARCHAR(20) NOT NULL,  
+ data_admissao_mec DATE NOT NULL,  
+ cpf VARCHAR(20) UNIQUE NOT NULL,
+ email VARCHAR(100) UNIQUE NOT NULL
 ); 
 
 CREATE TABLE servicos 
 ( 
- nome_servico INT,  
- descricao_servico INT,  
- tempo_medio_servico INT,  
- cod_servico INT PRIMARY KEY,  
+ cod_servico INT PRIMARY KEY AUTO_INCREMENT,
+ nome_servico VARCHAR(255) NOT NULL,  
+ descricao_servico VARCHAR(255),  
+ tempo_medio_servico VARCHAR(50)
 ); 
 
 CREATE TABLE cliente 
 ( 
- tel_cliente INT,  
- id_cliente INT PRIMARY KEY,  
- nome_cliente INT,  
- cidade_cliente INT,  
- email_cliente INT,  
+ id_cliente INT PRIMARY KEY AUTO_INCREMENT,
+ nome_cliente VARCHAR(255) NOT NULL,
+ tel_cliente VARCHAR(20),  
+ cidade_cliente VARCHAR(100),  
+ email_cliente VARCHAR(100)
 ); 
 
 CREATE TABLE veiculo 
 ( 
- marca_veic INT,  
- placa_veic INT PRIMARY KEY,  
- modelo_veic INT,  
+ placa_veic VARCHAR(20) PRIMARY KEY,
+ marca_veic VARCHAR(50),  
+ modelo_veic VARCHAR(100),  
  ano_veic INT,  
- cor_veic INT,  
- idcliente INT,  
+ cor_veic VARCHAR(50),  
+ idcliente INT,
+ CONSTRAINT FK_Veiculo_Cliente FOREIGN KEY(idcliente) REFERENCES cliente (id_cliente)
 ); 
 
 CREATE TABLE ordemservico 
 ( 
- data_entrada INT,  
- data_saida INT,  
- problema_relatado INT,  
- valor_total INT,  
- status INT,  
- id_ordem INT PRIMARY KEY,  
- idveiculo INT,  
+ id_ordem INT PRIMARY KEY AUTO_INCREMENT,
+ data_entrada DATE,  
+ data_saida DATE,  
+ problema_relatado VARCHAR(255),  
+ valor_total DECIMAL(10,2),  
+ status VARCHAR(50),  
+ idveiculo VARCHAR(20),
+ CONSTRAINT FK_OS_Veiculo FOREIGN KEY(idveiculo) REFERENCES veiculo (placa_veic)
 ); 
 
 CREATE TABLE servicos_mecanicos 
 ( 
- datainicio_servico date not null,  
- datafinalizacao_servico date not null,  
- valorunitario decimal(5,2) not null,  
- codserv_mec INT PRIMARY KEY auto_increment,  
- observacao Ivarchar(255) null,  
+ codserv_mec INT PRIMARY KEY AUTO_INCREMENT,
+ datainicio_servico DATE NOT NULL,  
+ datafinalizacao_servico DATE NOT NULL,  
+ valorunitario DECIMAL(10,2) NOT NULL,  
+ observacao VARCHAR(255) NULL,  
  id_ordem INT,  
  id_mec INT,  
- cod_servico INT, 
- finalizado bit not null 
-); 
-
-ALTER TABLE veiculo ADD FOREIGN KEY(idcliente) REFERENCES cliente (idcliente)
-ALTER TABLE ordemservico ADD FOREIGN KEY(idveiculo) REFERENCES veiculo (idveiculo)
-ALTER TABLE servicos_mecanicos ADD FOREIGN KEY(id_ordem) REFERENCES ordemservico (id_ordem)
-ALTER TABLE servicos_mecanicos ADD FOREIGN KEY(id_mec) REFERENCES mecanico (id_mec)
-ALTER TABLE servicos_mecanicos ADD FOREIGN KEY(cod_servico) REFERENCES servicos (cod_servico)
+ cod_servico INT,  
+ finalizado BIT NOT NULL,
+ CONSTRAINT FK_SM_Ordem FOREIGN KEY(id_ordem) REFERENCES ordemservico (id_ordem),
+ CONSTRAINT FK_SM_Mecanico FOREIGN KEY(id_mec) REFERENCES mecanico (id_mec),
+ CONSTRAINT FK_SM_Servico FOREIGN KEY(cod_servico) REFERENCES servicos (cod_servico)
+);
