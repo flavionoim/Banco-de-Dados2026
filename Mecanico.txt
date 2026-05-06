@@ -1,0 +1,64 @@
+CREATE TABLE mecanico 
+( 
+ idmecanico INT PRIMARY KEY,  
+ cpf  INT,  
+ telefone INT,  
+ nome INT,  
+ dataadmissao INT,  
+); 
+
+CREATE TABLE servico 
+( 
+ codservico INT PRIMARY KEY,  
+ nome INT,  
+ tempo_medio INT,  
+ descricao INT,  
+); 
+
+CREATE TABLE ordemservico 
+( 
+ id_ordem INT PRIMARY KEY,  
+ idveiculo INT,  
+ problema_relatado INT,  
+ valor INT,  
+ status INT,  
+ datainicioordem INT,  
+ datafimordem INT,  
+); 
+
+CREATE TABLE veiculo 
+( 
+ placa INT PRIMARY KEY,  
+ idcliente INT,  
+ marca INT,  
+ modelo INT,  
+ ano INT,  
+ cor INT,  
+); 
+
+CREATE TABLE cliente 
+( 
+ id_cliente INT PRIMARY KEY,  
+ nome INT,  
+ telefone INT,  
+ email INT,  
+ cidade INT,  
+); 
+
+CREATE TABLE servicos_mecanicos 
+( 
+ codserv_mec INT PRIMARY KEY,  
+ idmecanico INT PRIMARY KEY,  
+ codservico INT PRIMARY KEY,  
+ id_ordem INT PRIMARY KEY,  
+ datainicioservico INT,  
+ datafinalizacaoservico INT,  
+ valorunitario INT,  
+ observacao INT,  
+); 
+
+ALTER TABLE ordemservico ADD FOREIGN KEY(idveiculo) REFERENCES veiculo (idveiculo)
+ALTER TABLE veiculo ADD FOREIGN KEY(idcliente) REFERENCES cliente (idcliente)
+ALTER TABLE servicos_mecanicos ADD FOREIGN KEY(idmecanico) REFERENCES mecanico (idmecanico)
+ALTER TABLE servicos_mecanicos ADD FOREIGN KEY(codservico) REFERENCES servico (codservico)
+ALTER TABLE servicos_mecanicos ADD FOREIGN KEY(id_ordem) REFERENCES ordemservico (id_ordem)
