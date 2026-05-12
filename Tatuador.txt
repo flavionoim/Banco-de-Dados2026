@@ -27,7 +27,7 @@ CREATE TABLE agendamento
  idAgendamento INT AUTO INCREMENT PRIMARY KEY,  
  idtatuador INT NOT NULL,  
  idcliente INT NOT NULL,  
- status BOOL NOT NULL,  
+ status VARCHAR(50) NOT NULL,  
  dataagendamento DATE NOT NULL,  
  valorTatuagem DECIMAL(10,2) NOT NULL,  
  horaAgendamento DATE NOT NULL,  

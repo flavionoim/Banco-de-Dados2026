@@ -1,64 +1,69 @@
 CREATE TABLE mecanico 
 ( 
- idmecanico INT PRIMARY KEY,  
- cpf  INT,  
- telefone INT,  
- nome INT,  
- dataadmissao INT,  
+ idmecanico INT AUTO INCREMENT PRIMARY KEY,  
+ cpf CHAR(11) NOT NULL UNIQUE,  
+ telefone VARCHAR(20) NULL,  
+ nome VARCHAR(100) NOT NULL,  
+ dataadmissao DATE NOT NULL  
 ); 
 
 CREATE TABLE servico 
 ( 
- codservico INT PRIMARY KEY,  
- nome INT,  
- tempo_medio INT,  
- descricao INT,  
+ codservico INT AUTO INCREMENT PRIMARY KEY,  
+ nome VARCHAR(100) NOT NULL,  
+ tempo_medio TIME NOT NULL,  
+ descricao VARCHAR(150) NULL  
 ); 
 
 CREATE TABLE ordemservico 
 ( 
- id_ordem INT PRIMARY KEY,  
- idveiculo INT,  
- problema_relatado INT,  
- valor INT,  
- status INT,  
- datainicioordem INT,  
- datafimordem INT,  
+ id_ordem INT AUTO INCREMENT PRIMARY KEY,  
+ placa VARCHAR(8) NOT NULL, 
+ valor DECIMAL(10,2) NULL,
+ status VARCHAR(50) NOT NULL, 
+ problema_relatado TEXT NULL,      
+ datainicioordem DATE NOT NULL,  
+ datafimordem DATE NULL,
+ FOREIGN KEY(placa) REFERENCES veiculo (placa)
 ); 
 
 CREATE TABLE veiculo 
 ( 
- placa INT PRIMARY KEY,  
- idcliente INT,  
- marca INT,  
- modelo INT,  
- ano INT,  
- cor INT,  
+ placa VARCHAR(8) PRIMARY KEY,  
+ idcliente INT NOT NULL,  
+ marca VARCHAR(50) NOT NULL,  
+ modelo VARCHAR(50) NOT NULL,  
+ ano YEAR NOT NULL,  
+ cor VARCHAR(30) NULL,
+ FOREIGN KEY(idcliente) REFERENCES cliente (idcliente)
 ); 
 
 CREATE TABLE cliente 
 ( 
- id_cliente INT PRIMARY KEY,  
- nome INT,  
- telefone INT,  
- email INT,  
- cidade INT,  
+ id_cliente INT AUTO INCREMENT PRIMARY KEY,  
+ nome VARCHAR(100) NOT NULL,  
+ telefone VARCHAR(20) NULL,  
+ email VARCHAR(150) NULL UNIQUE,  
+ cidade VARCHAR(150) NOT NULL  
 ); 
 
 CREATE TABLE servicos_mecanicos 
 ( 
- codserv_mec INT PRIMARY KEY,  
- idmecanico INT PRIMARY KEY,  
- codservico INT PRIMARY KEY,  
- id_ordem INT PRIMARY KEY,  
- datainicioservico INT,  
- datafinalizacaoservico INT,  
- valorunitario INT,  
- observacao INT,  
+ codserv_mec INT AUTO INCREMENT PRIMARY KEY,  
+ idmecanico INT NOT NULL,  
+ codservico INT NOT NULL,  
+ id_ordem INT NOT NULL,  
+ datainicioservico DATE NOT NULL,  
+ datafinalizacaoservico DATE NULL,  
+ valorunitario DECIMAL(10,2) NULL,  
+ observacao VARCHAR(150) NULL,
+ FOREIGN KEY(idmecanico) REFERENCES mecanico (idmecanico),
+ FOREIGN KEY(codservico) REFERENCES servico (codservico),
+ FOREIGN KEY(id_ordem) REFERENCES ordemservico (id_ordem)  
 ); 
 
-ALTER TABLE ordemservico ADD FOREIGN KEY(idveiculo) REFERENCES veiculo (idveiculo)
-ALTER TABLE veiculo ADD FOREIGN KEY(idcliente) REFERENCES cliente (idcliente)
-ALTER TABLE servicos_mecanicos ADD FOREIGN KEY(idmecanico) REFERENCES mecanico (idmecanico)
-ALTER TABLE servicos_mecanicos ADD FOREIGN KEY(codservico) REFERENCES servico (codservico)
-ALTER TABLE servicos_mecanicos ADD FOREIGN KEY(id_ordem) REFERENCES ordemservico (id_ordem)
+ALTER TABLE ordemservico ADD 
+ALTER TABLE veiculo ADD 
+ALTER TABLE servicos_mecanicos ADD 
+ALTER TABLE servicos_mecanicos ADD 
+ALTER TABLE servicos_mecanicos ADD 
