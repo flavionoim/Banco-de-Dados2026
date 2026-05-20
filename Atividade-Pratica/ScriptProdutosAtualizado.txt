@@ -1,0 +1,112 @@
+Microsoft Windows [versão 6.3.9600]
+(c) 2013 Microsoft Corporation. Todos os direitos reservados.
+
+C:\Users\ETEC>cd C:\xampp\mysql\bin
+
+C:\xampp\mysql\bin>mysql -u root
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 52
+Server version: 10.4.24-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> use produtos
+Database changed
+MariaDB [produtos]> describe produtos
+    -> ;
++------------+---------------+------+-----+---------+----------------+
+| Field      | Type          | Null | Key | Default | Extra          |
++------------+---------------+------+-----+---------+----------------+
+| idproduto  | int(11)       | NO   | PRI | NULL    | auto_increment |
+| produto    | varchar(200)  | NO   |     | NULL    |                |
+| preco      | decimal(10,2) | NO   |     | NULL    |                |
+| qtde       | int(11)       | NO   |     | NULL    |                |
+| datacad    | date          | NO   |     | NULL    |                |
+| ativo      | bit(1)        | NO   |     | NULL    |                |
+| idcat      | int(11)       | YES  | MUL | NULL    |                |
+| observacao | varchar(255)  | YES  |     | NULL    |                |
++------------+---------------+------+-----+---------+----------------+
+8 rows in set (0.031 sec)
+
+MariaDB [produtos]> describe categorias;
+ERROR 1146 (42S02): Table 'produtos.categorias' doesn't exist
+MariaDB [produtos]> describe categoria;
++-------------+--------------+------+-----+---------+----------------+
+| Field       | Type         | Null | Key | Default | Extra          |
++-------------+--------------+------+-----+---------+----------------+
+| idcategoria | int(11)      | NO   | PRI | NULL    | auto_increment |
+| categoria   | varchar(100) | NO   |     | NULL    |                |
++-------------+--------------+------+-----+---------+----------------+
+2 rows in set (0.028 sec)
+
+MariaDB [produtos]> ALTER TABLE produtos ADD marca VARCHAR(100) NOT NULL;
+Query OK, 0 rows affected (0.102 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [produtos]> describe produtos;
++------------+---------------+------+-----+---------+----------------+
+| Field      | Type          | Null | Key | Default | Extra          |
++------------+---------------+------+-----+---------+----------------+
+| idproduto  | int(11)       | NO   | PRI | NULL    | auto_increment |
+| produto    | varchar(200)  | NO   |     | NULL    |                |
+| preco      | decimal(10,2) | NO   |     | NULL    |                |
+| qtde       | int(11)       | NO   |     | NULL    |                |
+| datacad    | date          | NO   |     | NULL    |                |
+| ativo      | bit(1)        | NO   |     | NULL    |                |
+| idcat      | int(11)       | YES  | MUL | NULL    |                |
+| observacao | varchar(255)  | YES  |     | NULL    |                |
+| marca      | varchar(100)  | NO   |     | NULL    |                |
++------------+---------------+------+-----+---------+----------------+
+9 rows in set (2.249 sec)
+
+MariaDB [produtos]> INSERT INTO produtos (produto, preco, qtde, datacad, ativo,
+idcat, observacao, marca) VALUES
+    -> ('Milho em Conserva',15.85,50,'2026-05-20',1,1,'Nenhuma', 'Quero');
+Query OK, 1 row affected (0.017 sec)
+
+MariaDB [produtos]> INSERT INTO `categoria` (`idcategoria`, `categoria`) VALUES
+    -> (5, 'Vestimenta'),
+    -> (6, 'Molhos'),
+    -> (7, 'Horti-Fruti'),
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that
+corresponds to your MariaDB server version for the right syntax to use near '' a
+t line 4
+MariaDB [produtos]> INSERT INTO `categoria` (`idcategoria`, `categoria`) VALUES
+    -> (5, 'Vestimenta'),
+    -> (6, 'Molhos'),
+    -> (7, 'Horti-Fruti');
+Query OK, 3 rows affected (0.037 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+MariaDB [produtos]> INSERT INTO produtos (produto, preco, qtde, datacad, ativo,
+idcat, observacao, marca) VALUES
+    -> ('Maionese de Alho',10.99,100,'2026-05-20',1,6,'Contem Alho', 'Hellmans')
+;
+Query OK, 1 row affected (0.023 sec)
+
+MariaDB [produtos]> INSERT INTO produtos (produto, preco, qtde, datacad, ativo,
+idcat, observacao, marca) VALUES
+    -> ('Alfaçe',18.99,150,'2026-05-20',1,7,'Com Raizes', 'Nagumo');
+Query OK, 1 row affected (0.051 sec)
+
+MariaDB [produtos]> INSERT INTO produtos (produto, preco, qtde, datacad, ativo,
+idcat, observacao, marca) VALUES
+    -> ('Camiseta Social',69.80,75,'2026-05-20',1,5,'Fios de Linho', 'Polo');
+Query OK, 1 row affected (0.050 sec)
+
+MariaDB [produtos]> INSERT INTO produtos (produto, preco, qtde, datacad, ativo,
+idcat, observacao, marca) VALUES
+    -> ('Camisa Gucci Estampada',120.89,200,'2026-05-20',1,5,'Estampa Adesivada'
+, 'Gucci');
+Query OK, 1 row affected (0.018 sec)
+
+MariaDB [produtos]> INSERT INTO produtos (produto, preco, qtde, datacad, ativo,
+idcat, observacao, marca) VALUES
+    -> ('Camisa Viv Leroa Lisa',119.89,200,'2026-05-20',1,5,'Sem Estampa', 'Viv
+Leroa');
+Query OK, 1 row affected (0.023 sec)
+
+MariaDB [produtos]>
