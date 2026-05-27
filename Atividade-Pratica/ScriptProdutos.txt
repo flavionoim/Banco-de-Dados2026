@@ -1,0 +1,458 @@
+Microsoft Windows [versão 10.0.19045.5371]
+(c) Microsoft Corporation. Todos os direitos reservados.
+
+C:\Users\lab1-aluno>c C:\xampp\mysql\bin
+'c' não é reconhecido como um comando interno
+ou externo, um programa operável ou um arquivo em lotes.
+
+C:\Users\lab1-aluno>mysql -u root
+'mysql' não é reconhecido como um comando interno
+ou externo, um programa operável ou um arquivo em lotes.
+
+C:\Users\lab1-aluno>C:\xampp\mysql\bin
+'C:\xampp\mysql\bin' não é reconhecido como um comando interno
+ou externo, um programa operável ou um arquivo em lotes.
+
+C:\Users\lab1-aluno>cd C:\xampp\mysql\bin
+
+C:\xampp\mysql\bin>mysql -u root
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 9
+Server version: 10.4.28-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> show daabase;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'daabase' at line 1
+MariaDB [(none)]> show database;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'database' at line 1
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| test               |
++--------------------+
+5 rows in set (0.024 sec)
+
+MariaDB [(none)]> CREATE DATABASE produtos;
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [(none)]> use produtos;
+Database changed
+MariaDB [produtos]> create table categoria (
+    -> idcategoria int auto_increment primary key,
+    -> categoria varchar(100) not null,
+    -> descricao varchar(255) not null);
+Query OK, 0 rows affected (0.015 sec)
+
+MariaDB [produtos]> create table produto (
+    -> idproduto int auto_increment primary key,
+    -> produto varchar(200) not null,
+    -> preco decimal(10,2) not null,
+    -> qtde int not null,
+    -> datacadastro date not null,
+    -> ativo bit not null,
+    -> idcat int,
+    -> idcat int,
+    -> foreign key (idcat) references categoria (idcategoria));
+ERROR 1060 (42S21): Duplicate column name 'idcat'
+MariaDB [produtos]> create table produto (
+    -> idproduto int auto_increment primary key,
+    ->  produto varchar(200) not null,
+    ->  produto varchar(200) not null,
+    ->  produto varchar(200) not null,;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 5
+MariaDB [produtos]> create table produto (
+    -> idproduto int auto_increment primary key,
+    -> produto varchar(200) not null,
+    -> preco decimal(10,2) not null,
+    -> qtde int not null,
+    -> datacadastro date not null,
+    -> ativo bit not null,
+    -> idcat int,
+    -> foreign key (idcat) references categoria (idcategoria));
+Query OK, 0 rows affected (0.027 sec)
+
+MariaDB [produtos]> rename table produto to produtos;
+Query OK, 0 rows affected (0.012 sec)
+
+MariaDB [produtos]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| produtos           |
+| test               |
++--------------------+
+6 rows in set (0.001 sec)
+
+MariaDB [produtos]> alter table produtos change datacadastro datacad date not null;
+Query OK, 0 rows affected (0.006 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [produtos]> alter table produtos add observacao varchar(255) null;
+Query OK, 0 rows affected (0.009 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [produtos]> alter table categoria drop descricao;
+Query OK, 0 rows affected (0.007 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [produtos]> describe categoria
+    -> ;
++-------------+--------------+------+-----+---------+----------------+
+| Field       | Type         | Null | Key | Default | Extra          |
++-------------+--------------+------+-----+---------+----------------+
+| idcategoria | int(11)      | NO   | PRI | NULL    | auto_increment |
+| categoria   | varchar(100) | NO   |     | NULL    |                |
++-------------+--------------+------+-----+---------+----------------+
+2 rows in set (0.011 sec)
+
+MariaDB [produtos]> insert into categoria (categoria) values (
+    -> ('Enlatados'),('Laticinios'),('Açougue'),('Limpeza');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 2
+MariaDB [produtos]> insert into categoria (categoria) values (
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1
+MariaDB [produtos]> insert into categoria (categoria) values
+    -> ('Enlatados'),('Laticinios'),('Açougue'),('Limpeza');
+Query OK, 4 rows affected (0.006 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+MariaDB [produtos]> describe produtos
+    -> ;
++------------+---------------+------+-----+---------+----------------+
+| Field      | Type          | Null | Key | Default | Extra          |
++------------+---------------+------+-----+---------+----------------+
+| idproduto  | int(11)       | NO   | PRI | NULL    | auto_increment |
+| produto    | varchar(200)  | NO   |     | NULL    |                |
+| preco      | decimal(10,2) | NO   |     | NULL    |                |
+| qtde       | int(11)       | NO   |     | NULL    |                |
+| datacad    | date          | NO   |     | NULL    |                |
+| ativo      | bit(1)        | NO   |     | NULL    |                |
+| idcat      | int(11)       | YES  | MUL | NULL    |                |
+| observacao | varchar(255)  | YES  |     | NULL    |                |
++------------+---------------+------+-----+---------+----------------+
+8 rows in set (0.015 sec)
+
+MariaDB [produtos]> insert into produtos (produto, preco, qtde, datacad, ativo, idcat, observacao) values
+    -> ('Acém Peça',39.99,50,'2026-06-13',1,3,'Sem Gordura');
+Query OK, 1 row affected (0.007 sec)
+
+MariaDB [produtos]> ('Leite Parmalat Unidade',16.60,100,'2026-06-13',1,2,'Desnatado');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''Leite Parmalat Unidade',16.60,100,'2026-06-13',1,2,'Desnatado')' at line 1
+MariaDB [produtos]> ('Leite Parmalat Unidade',16.60,100,'2026-06-13',1,2,'Desnatado');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near ''Leite Parmalat Unidade',16.60,100,'2026-06-13',1,2,'Desnatado')' at line 1
+MariaDB [produtos]> insert into produtos (produto, preco, qtde, datacad, ativo, idcat, observacao) values
+    -> ('Leite Parmalat Unidade',16.60,100,'2026-06-13',1,2,'Desnatado');
+Query OK, 1 row affected (0.006 sec)
+
+MariaDB [produtos]> insert into produtos (produto, preco, qtde, datacad, ativo, idcat, observacao) values
+    -> ('Queijo Minas Roçinha',24.90,90,'2026-06-14',1,2,'Sem Observação');
+Query OK, 1 row affected (0.006 sec)
+
+MariaDB [produtos]>
+
+
+
+
+SEGUNDA AULA ---------------------------
+
+Microsoft Windows [versão 6.3.9600]
+(c) 2013 Microsoft Corporation. Todos os direitos reservados.
+
+C:\Users\ETEC>cd C:\xampp\mysql\bin
+
+C:\xampp\mysql\bin>mysql -u root
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 52
+Server version: 10.4.24-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> use produtos
+Database changed
+MariaDB [produtos]> describe produtos
+    -> ;
++------------+---------------+------+-----+---------+----------------+
+| Field      | Type          | Null | Key | Default | Extra          |
++------------+---------------+------+-----+---------+----------------+
+| idproduto  | int(11)       | NO   | PRI | NULL    | auto_increment |
+| produto    | varchar(200)  | NO   |     | NULL    |                |
+| preco      | decimal(10,2) | NO   |     | NULL    |                |
+| qtde       | int(11)       | NO   |     | NULL    |                |
+| datacad    | date          | NO   |     | NULL    |                |
+| ativo      | bit(1)        | NO   |     | NULL    |                |
+| idcat      | int(11)       | YES  | MUL | NULL    |                |
+| observacao | varchar(255)  | YES  |     | NULL    |                |
++------------+---------------+------+-----+---------+----------------+
+8 rows in set (0.031 sec)
+
+MariaDB [produtos]> describe categorias;
+ERROR 1146 (42S02): Table 'produtos.categorias' doesn't exist
+MariaDB [produtos]> describe categoria;
++-------------+--------------+------+-----+---------+----------------+
+| Field       | Type         | Null | Key | Default | Extra          |
++-------------+--------------+------+-----+---------+----------------+
+| idcategoria | int(11)      | NO   | PRI | NULL    | auto_increment |
+| categoria   | varchar(100) | NO   |     | NULL    |                |
++-------------+--------------+------+-----+---------+----------------+
+2 rows in set (0.028 sec)
+
+MariaDB [produtos]> ALTER TABLE produtos ADD marca VARCHAR(100) NOT NULL;
+Query OK, 0 rows affected (0.102 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [produtos]> describe produtos;
++------------+---------------+------+-----+---------+----------------+
+| Field      | Type          | Null | Key | Default | Extra          |
++------------+---------------+------+-----+---------+----------------+
+| idproduto  | int(11)       | NO   | PRI | NULL    | auto_increment |
+| produto    | varchar(200)  | NO   |     | NULL    |                |
+| preco      | decimal(10,2) | NO   |     | NULL    |                |
+| qtde       | int(11)       | NO   |     | NULL    |                |
+| datacad    | date          | NO   |     | NULL    |                |
+| ativo      | bit(1)        | NO   |     | NULL    |                |
+| idcat      | int(11)       | YES  | MUL | NULL    |                |
+| observacao | varchar(255)  | YES  |     | NULL    |                |
+| marca      | varchar(100)  | NO   |     | NULL    |                |
++------------+---------------+------+-----+---------+----------------+
+9 rows in set (2.249 sec)
+
+MariaDB [produtos]> INSERT INTO produtos (produto, preco, qtde, datacad, ativo,
+idcat, observacao, marca) VALUES
+    -> ('Milho em Conserva',15.85,50,'2026-05-20',1,1,'Nenhuma', 'Quero');
+Query OK, 1 row affected (0.017 sec)
+
+MariaDB [produtos]> INSERT INTO `categoria` (`idcategoria`, `categoria`) VALUES
+    -> (5, 'Vestimenta'),
+    -> (6, 'Molhos'),
+    -> (7, 'Horti-Fruti'),
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that
+corresponds to your MariaDB server version for the right syntax to use near '' a
+t line 4
+MariaDB [produtos]> INSERT INTO `categoria` (`idcategoria`, `categoria`) VALUES
+    -> (5, 'Vestimenta'),
+    -> (6, 'Molhos'),
+    -> (7, 'Horti-Fruti');
+Query OK, 3 rows affected (0.037 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+MariaDB [produtos]> INSERT INTO produtos (produto, preco, qtde, datacad, ativo,
+idcat, observacao, marca) VALUES
+    -> ('Maionese de Alho',10.99,100,'2026-05-20',1,6,'Contem Alho', 'Hellmans')
+;
+Query OK, 1 row affected (0.023 sec)
+
+MariaDB [produtos]> INSERT INTO produtos (produto, preco, qtde, datacad, ativo,
+idcat, observacao, marca) VALUES
+    -> ('Alfaçe',18.99,150,'2026-05-20',1,7,'Com Raizes', 'Nagumo');
+Query OK, 1 row affected (0.051 sec)
+
+MariaDB [produtos]> INSERT INTO produtos (produto, preco, qtde, datacad, ativo,
+idcat, observacao, marca) VALUES
+    -> ('Camiseta Social',69.80,75,'2026-05-20',1,5,'Fios de Linho', 'Polo');
+Query OK, 1 row affected (0.050 sec)
+
+MariaDB [produtos]> INSERT INTO produtos (produto, preco, qtde, datacad, ativo,
+idcat, observacao, marca) VALUES
+    -> ('Camisa Gucci Estampada',120.89,200,'2026-05-20',1,5,'Estampa Adesivada'
+, 'Gucci');
+Query OK, 1 row affected (0.018 sec)
+
+MariaDB [produtos]> INSERT INTO produtos (produto, preco, qtde, datacad, ativo,
+idcat, observacao, marca) VALUES
+    -> ('Camisa Viv Leroa Lisa',119.89,200,'2026-05-20',1,5,'Sem Estampa', 'Viv
+Leroa');
+Query OK, 1 row affected (0.023 sec)
+
+MariaDB [produtos]>
+
+
+
+
+
+
+
+
+
+TERCEIRA AULA -----------------------------
+
+
+
+Microsoft Windows [versão 6.3.9600]
+(c) 2013 Microsoft Corporation. Todos os direitos reservados.
+
+C:\Users\ETEC>cd C:\xampp\mysql\bin
+
+C:\xampp\mysql\bin>mysql -u root
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 52
+Server version: 10.4.24-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> use produtos;
+Database changed
+MariaDB [produtos]> describe produtos;
++------------+---------------+------+-----+---------+----------------+
+| Field      | Type          | Null | Key | Default | Extra          |
++------------+---------------+------+-----+---------+----------------+
+| idproduto  | int(11)       | NO   | PRI | NULL    | auto_increment |
+| produto    | varchar(200)  | NO   |     | NULL    |                |
+| preco      | decimal(10,2) | NO   |     | NULL    |                |
+| qtde       | int(11)       | NO   |     | NULL    |                |
+| datacad    | date          | NO   |     | NULL    |                |
+| ativo      | bit(1)        | NO   |     | NULL    |                |
+| idcat      | int(11)       | YES  | MUL | NULL    |                |
+| observacao | varchar(255)  | YES  |     | NULL    |                |
+| marca      | varchar(100)  | NO   |     | NULL    |                |
++------------+---------------+------+-----+---------+----------------+
+9 rows in set (0.306 sec)
+
+MariaDB [produtos]> select * from produtos;
++-----------+------------------------+--------+------+------------+-------+-----
+--+-------------------+-----------+
+| idproduto | produto                | preco  | qtde | datacad    | ativo | idca
+t | observacao        | marca     |
++-----------+------------------------+--------+------+------------+-------+-----
+--+-------------------+-----------+
+|         1 | Acém Peça              |  39.99 |   50 | 2026-06-13 | ?     |
+3 | Sem Gordura       |           |
+|         2 | Leite Parmalat Unidade |  16.60 |  100 | 2026-06-13 | ?     |
+2 | Desnatado         |           |
+|         3 | Queijo Minas Roçinha   |  24.90 |   90 | 2026-06-14 | ?     |
+2 | Sem Observação    |           |
+|         4 | Milho em Conserva      |  15.85 |   50 | 2026-05-20 | ?     |
+1 | Nenhuma           | Quero     |
+|         5 | Maionese de Alho       |  10.99 |  100 | 2026-05-20 | ?     |
+6 | Contem Alho       | Hellmans  |
+|         6 | Alfaçe                 |  18.99 |  150 | 2026-05-20 | ?     |
+7 | Com Raizes        | Nagumo    |
+|         7 | Camiseta Social        |  69.80 |   75 | 2026-05-20 | ?     |
+5 | Fios de Linho     | Polo      |
+|         8 | Camisa Gucci Estampada | 120.89 |  200 | 2026-05-20 | ?     |
+5 | Estampa Adesivada | Gucci     |
+|         9 | Camisa Viv Leroa Lisa  | 119.89 |  200 | 2026-05-20 | ?     |
+5 | Sem Estampa       | Viv Leroa |
++-----------+------------------------+--------+------+------------+-------+-----
+--+-------------------+-----------+
+9 rows in set (0.000 sec)
+
+MariaDB [produtos]> update produtos set produto = 'Camisa Estampada' WHERE idpro
+duto = 8;
+Query OK, 1 row affected (0.019 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [produtos]> update produtos set produto = 'Camisa Lisa' WHERE idproduto
+= 9;
+Query OK, 1 row affected (0.030 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [produtos]> INSERT INTO produtos (produto, preco, qtde, datacad, ativo,
+    -> idcat, observacao, marca) VALUES
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that
+corresponds to your MariaDB server version for the right syntax to use near '' a
+t line 2
+MariaDB [produtos]> INSERT INTO produtos (produto, preco, qtde, datacad, ativo,
+idcat, observacao, marca) VALUES
+    -> ('Camisa Viv Leroa Lisa',119.89,200,'2026-05-20',1,5,'Sem Estampa', 'Viv
+    '> ;');
+Query OK, 1 row affected (0.027 sec)
+
+MariaDB [produtos]> INSERT INTO produtos (produto, preco, qtde, datacad, ativo,
+idcat, observacao, marca) VALUES
+    -> ('Costela Bovina',67.90,250,'2026-05-27',1,3,'Muita gordura', 'Friboi');
+Query OK, 1 row affected (0.017 sec)
+
+MariaDB [produtos]> INSERT INTO produtos (produto, preco, qtde, datacad, ativo,
+idcat, observacao, marca) VALUES
+    -> ('Repolho Roxo',15.80,100,'2026-05-27',1,7,'Sem raízes', 'Da Terrinha')
+    -> ('Tomate',21.90,135,'2026-05-27',1,7,'Sem agrotóxicos', 'Nagumo')
+    -> ('Detergente',9.99,540,'2026-05-27',1,4,'Não comestível', 'Ypê')
+    -> ('Sabão em Pó',29.99,700,'2026-05-27',1,4,'Tamanho Família', 'Omo');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that
+corresponds to your MariaDB server version for the right syntax to use near '('T
+omate',21.90,135,'2026-05-27',1,7,'Sem agrotóxicos', 'Nagumo')
+('Detergen...' at line 3
+MariaDB [produtos]> INSERT INTO produtos (produto, preco, qtde, datacad, ativo,
+idcat, observacao, marca) VALUES
+    -> ('Repolho Roxo',15.80,100,'2026-05-27',1,7,'Sem raízes', 'Da Terrinha');
+Query OK, 1 row affected (0.030 sec)
+
+MariaDB [produtos]> INSERT INTO produtos (produto, preco, qtde, datacad, ativo,
+idcat, observacao, marca) VALUES
+    -> ('Tomate',21.90,135,'2026-05-27',1,7,'Sem agrotóxicos', 'Nagumo');
+Query OK, 1 row affected (0.028 sec)
+
+MariaDB [produtos]> INSERT INTO produtos (produto, preco, qtde, datacad, ativo,
+idcat, observacao, marca) VALUES
+    -> ('Detergente',9.99,540,'2026-05-27',1,4,'Não comestível', 'Ypê')
+    -> ;
+Query OK, 1 row affected (0.040 sec)
+
+MariaDB [produtos]> INSERT INTO produtos (produto, preco, qtde, datacad, ativo,
+idcat, observacao, marca) VALUES
+    -> ('Sabão em Pó',29.99,700,'2026-05-27',1,4,'Tamanho Família', 'Omo');
+Query OK, 1 row affected (0.025 sec)
+
+MariaDB [produtos]> update produtos set marca = 'Sadia' WHERE idproduto = 1;
+Query OK, 1 row affected (0.032 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [produtos]> update produtos set marca = 'Italac' WHERE idproduto = 2;
+Query OK, 1 row affected (0.032 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [produtos]> update produtos set produto = 'Leite 1L' WHERE idproduto = 2
+;
+Query OK, 1 row affected (0.039 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [produtos]> update produtos set produto = 'Queijo Gorgonzola' WHERE idpr
+oduto = 3;
+Query OK, 1 row affected (0.043 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [produtos]> update produtos set marca = 'Fusqueijão' WHERE idproduto = 3
+;
+Query OK, 1 row affected (0.032 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [produtos]> update produtos set observacao = 'Milho Verde'  WHERE idprod
+uto = 4;
+Query OK, 1 row affected (0.032 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [produtos]> update produtos set observacao = 'Extra Cremoso'  WHERE idpr
+oduto = 3;
+Query OK, 1 row affected (0.041 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [produtos]> INSERT INTO produtos (produto, preco, qtde, datacad, ativo,
+idcat, observacao, marca) VALUES
+    -> ('Leite Integral',4.98,150,'2026-05-27',1,2,'Unidade', 'Parmalat');
+Query OK, 1 row affected (0.037 sec)
+
+MariaDB [produtos]> INSERT INTO produtos (produto, preco, qtde, datacad, ativo,
+idcat, observacao, marca) VALUES
+    -> ('Queijo Mussarela',29.40,175,'2026-05-27',1,2,'Pouco cremoso', 'Da Rocin
+ha');
+Query OK, 1 row affected (0.047 sec)
+
+MariaDB [produtos]> 

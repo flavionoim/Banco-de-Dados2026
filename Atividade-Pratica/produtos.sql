@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 20-Maio-2026 às 22:56
+-- Tempo de geração: 27-Maio-2026 às 22:49
 -- Versão do servidor: 10.4.24-MariaDB
 -- versão do PHP: 7.4.29
 
@@ -70,15 +70,22 @@ CREATE TABLE `produtos` (
 --
 
 INSERT INTO `produtos` (`idproduto`, `produto`, `preco`, `qtde`, `datacad`, `ativo`, `idcat`, `observacao`, `marca`) VALUES
-(1, 'Acém Peça', '39.99', 50, '2026-06-13', b'1', 3, 'Sem Gordura', ''),
-(2, 'Leite Parmalat Unidade', '16.60', 100, '2026-06-13', b'1', 2, 'Desnatado', ''),
-(3, 'Queijo Minas Roçinha', '24.90', 90, '2026-06-14', b'1', 2, 'Sem Observação', ''),
-(4, 'Milho em Conserva', '15.85', 50, '2026-05-20', b'1', 1, 'Nenhuma', 'Quero'),
+(1, 'Acém Peça', '39.99', 50, '2026-06-13', b'1', 3, 'Sem Gordura', 'Sadia'),
+(2, 'Leite 1L', '16.60', 100, '2026-06-13', b'1', 2, 'Desnatado', 'Italac'),
+(3, 'Queijo Gorgonzola', '24.90', 90, '2026-06-14', b'1', 2, 'Extra Cremoso', 'Fusqueijão'),
+(4, 'Milho em Conserva', '15.85', 50, '2026-05-20', b'1', 1, 'Milho Verde', 'Quero'),
 (5, 'Maionese de Alho', '10.99', 100, '2026-05-20', b'1', 6, 'Contem Alho', 'Hellmans'),
 (6, 'Alfaçe', '18.99', 150, '2026-05-20', b'1', 7, 'Com Raizes', 'Nagumo'),
 (7, 'Camiseta Social', '69.80', 75, '2026-05-20', b'1', 5, 'Fios de Linho', 'Polo'),
-(8, 'Camisa Gucci Estampada', '120.89', 200, '2026-05-20', b'1', 5, 'Estampa Adesivada', 'Gucci'),
-(9, 'Camisa Viv Leroa Lisa', '119.89', 200, '2026-05-20', b'1', 5, 'Sem Estampa', 'Viv Leroa');
+(8, 'Camisa Estampada', '120.89', 200, '2026-05-20', b'1', 5, 'Estampa Adesivada', 'Gucci'),
+(9, 'Camisa Lisa', '119.89', 200, '2026-05-20', b'1', 5, 'Sem Estampa', 'Viv Leroa'),
+(11, 'Costela Bovina', '67.90', 250, '2026-05-27', b'1', 3, 'Muita gordura', 'Friboi'),
+(12, 'Repolho Roxo', '15.80', 100, '2026-05-27', b'1', 7, 'Sem raízes', 'Da Terrinha'),
+(13, 'Tomate', '21.90', 135, '2026-05-27', b'1', 7, 'Sem agrotóxicos', 'Nagumo'),
+(14, 'Detergente', '9.99', 540, '2026-05-27', b'1', 4, 'Não comestível', 'Ypê'),
+(15, 'Sabão em Pó', '29.99', 700, '2026-05-27', b'1', 4, 'Tamanho Família', 'Omo'),
+(16, 'Leite Integral', '4.98', 150, '2026-05-27', b'1', 2, 'Unidade', 'Parmalat'),
+(17, 'Queijo Mussarela', '29.40', 175, '2026-05-27', b'1', 2, 'Pouco cremoso', 'Da Rocinha');
 
 --
 -- Índices para tabelas despejadas
@@ -111,7 +118,7 @@ ALTER TABLE `categoria`
 -- AUTO_INCREMENT de tabela `produtos`
 --
 ALTER TABLE `produtos`
-  MODIFY `idproduto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `idproduto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- Restrições para despejos de tabelas
