@@ -1,0 +1,244 @@
+Microsoft Windows [versão 6.3.9600]
+(c) 2013 Microsoft Corporation. Todos os direitos reservados.
+
+C:\Users\ETEC>C:\xampp\mysql\bin
+'C:\xampp\mysql\bin' não é reconhecido como um comando interno
+ou externo, um programa operável ou um arquivo em lotes.
+
+C:\Users\ETEC>cd C:\xampp\mysql\bin
+
+C:\xampp\mysql\bin>mysql -u root
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 24
+Server version: 10.4.24-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> create database jornal;
+Query OK, 1 row affected (0.010 sec)
+
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| jornal             |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| test               |
++--------------------+
+6 rows in set (0.001 sec)
+
+MariaDB [(none)]> use jornal;
+Database changed
+MariaDB [jornal]> create table categoria(
+    -> idcategoria int primary key auto_increment,
+    -> categoria varchar(30));
+Query OK, 0 rows affected (0.323 sec)
+
+MariaDB [jornal]> describe categorias;
+ERROR 1146 (42S02): Table 'jornal.categorias' doesn't exist
+MariaDB [jornal]> describe categorias;
+ERROR 1146 (42S02): Table 'jornal.categorias' doesn't exist
+MariaDB [jornal]> describe categoria;
++-------------+-------------+------+-----+---------+----------------+
+| Field       | Type        | Null | Key | Default | Extra          |
++-------------+-------------+------+-----+---------+----------------+
+| idcategoria | int(11)     | NO   | PRI | NULL    | auto_increment |
+| categoria   | varchar(30) | YES  |     | NULL    |                |
++-------------+-------------+------+-----+---------+----------------+
+2 rows in set (0.060 sec)
+
+MariaDB [jornal]> RENAME TABLE categoria TO categorias;
+Query OK, 0 rows affected (0.100 sec)
+
+MariaDB [jornal]> show tables;
++------------------+
+| Tables_in_jornal |
++------------------+
+| categorias       |
++------------------+
+1 row in set (0.001 sec)
+
+MariaDB [jornal]> ALTER TABLE categorias CHANGE COLUMN categoria nomeCategoria v
+archar(30) not null;
+Query OK, 0 rows affected (0.327 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [jornal]> describe categorias;
++---------------+-------------+------+-----+---------+----------------+
+| Field         | Type        | Null | Key | Default | Extra          |
++---------------+-------------+------+-----+---------+----------------+
+| idcategoria   | int(11)     | NO   | PRI | NULL    | auto_increment |
+| nomeCategoria | varchar(30) | NO   |     | NULL    |                |
++---------------+-------------+------+-----+---------+----------------+
+2 rows in set (0.031 sec)
+
+MariaDB [jornal]> ALTER TABLE categorias ADD COLUMN teste varchar(10);
+Query OK, 0 rows affected (0.042 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [jornal]> ALTER TABLE categorias DROP COLUMN teste;
+Query OK, 0 rows affected (0.036 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [jornal]> describe categorias;
++---------------+-------------+------+-----+---------+----------------+
+| Field         | Type        | Null | Key | Default | Extra          |
++---------------+-------------+------+-----+---------+----------------+
+| idcategoria   | int(11)     | NO   | PRI | NULL    | auto_increment |
+| nomeCategoria | varchar(30) | NO   |     | NULL    |                |
++---------------+-------------+------+-----+---------+----------------+
+2 rows in set (0.096 sec)
+
+MariaDB [jornal]> create table redator(
+    -> codRedator int auto_increment primary_key,
+    -> nome varchar(100)
+    -> fdsafdsa
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that
+corresponds to your MariaDB server version for the right syntax to use near '
+nome varchar(100)
+fdsafdsa' at line 2
+MariaDB [jornal]> create table redator(
+    -> codRedator int auto_increment primary_key,
+    -> nome varchar(100),
+    -> dataNascimento date,
+    -> email varchar(50) unique,
+    -> telefone varchar(15),
+    -> cpf varchar(16) unique;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that
+corresponds to your MariaDB server version for the right syntax to use near '
+nome varchar(100),
+dataNascimento date,
+email varchar(50) unique,
+telefone v...' at line 2
+MariaDB [jornal]> create table redator(
+    -> codRedator int auto_increment primary_key,
+    -> nome varchar(100),
+    -> dataNascimento date,
+    -> email varchar(50) unique,
+    -> telefone varchar(15),
+    -> cpf varchar(16) unique);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that
+corresponds to your MariaDB server version for the right syntax to use near '
+nome varchar(100),
+dataNascimento date,
+email varchar(50) unique,
+telefone v...' at line 2
+MariaDB [jornal]> create table redator(
+    -> codRedator int auto_increment primary key,
+    -> nome varchar(100),
+    -> dataNascimento date,
+    -> email varchar(50) unique,
+    -> telefone varchar(15),
+    -> cpf varchar(16) unique);
+Query OK, 0 rows affected (0.158 sec)
+
+MariaDB [jornal]> describe redator;
++----------------+--------------+------+-----+---------+----------------+
+| Field          | Type         | Null | Key | Default | Extra          |
++----------------+--------------+------+-----+---------+----------------+
+| codRedator     | int(11)      | NO   | PRI | NULL    | auto_increment |
+| nome           | varchar(100) | YES  |     | NULL    |                |
+| dataNascimento | date         | YES  |     | NULL    |                |
+| email          | varchar(50)  | YES  | UNI | NULL    |                |
+| telefone       | varchar(15)  | YES  |     | NULL    |                |
+| cpf            | varchar(16)  | YES  | UNI | NULL    |                |
++----------------+--------------+------+-----+---------+----------------+
+6 rows in set (0.031 sec)
+
+MariaDB [jornal]> create table noticias(
+    -> idNoticias int auto_increment primary key,
+    -> titulonoticia varchar(50),
+    -> descricao verchar(255),
+    -> data date,
+    -> redator int,
+    -> categoria int,
+    -> foreign key (redator) references redator(codRedator),
+    -> foreign key (categoria) references categorias(idcategoria));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that
+corresponds to your MariaDB server version for the right syntax to use near '(25
+5),
+data date,
+redator int,
+categoria int,
+foreign key (redator) reference...' at line 4
+MariaDB [jornal]> create table noticias(
+    -> idNoticias int auto_increment primary key,
+    -> titulonoticia varchar(50),
+    -> descricao varchar(255),
+    -> data date,
+    -> redator int,
+    -> categoria int,
+    -> foreign key (redator) references redator(codRedator),
+    -> foreign key (categoria) references categorias(idcategoria));
+Query OK, 0 rows affected (0.585 sec)
+
+MariaDB [jornal]> insert into categorias (
+    -> gfokmiuhgfdijngfdihgfd
+    -> .;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that
+corresponds to your MariaDB server version for the right syntax to use near '' a
+t line 3
+MariaDB [jornal]> insert into categorias (nomeCategoria) VALUES
+    -> ('Informativa'),
+    -> ('Interpretativa'),
+    -> ('Opinativa');
+Query OK, 3 rows affected (0.062 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+MariaDB [jornal]> insert into noticias (titulonoticia, descricao, data, redator,
+ categoria) VALUES
+    -> ('Acidente Grave em Mauá', 'Jovem foi atropelado por um ônibus na Avenida
+ Barão de Mauã enquanto atravessava a rua', '2026-06-10', 'Flávio Noim', 'Infoma
+tiva'),
+    -> ('Dinheiro e Ingratidão', 'Morador de rua encontrou R$1000 em dinheiro na
+ rua e devolveu ao dono, porém dono nem mesmo o agradeceu', '2026-06-10', 'Flávi
+o Noim', 'Infomativa'),
+    -> ('Opinião Forte de Flávio', 'Todos os políticos deveriam ser presos - Diz
+ Flávio noim em entrevista para a rede Globo', '2026-06-10', '', 'Opinativa')jfs
+ijbds;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that
+corresponds to your MariaDB server version for the right syntax to use near 'jfs
+ijbds' at line 4
+MariaDB [jornal]> insert into redator (nome, dataNascimento, email, telefone, cp
+f) VALUES
+    -> ('Flávio noim', '2009-12-20', 'gunoim222@gmail.com', '11935468787', '5289
+0865432');
+Query OK, 1 row affected (0.038 sec)
+
+MariaDB [jornal]> insert into redator (nome, dataNascimento, email, telefone, cp
+f) VALUES
+    -> ('Paulo Coelho', '1980-11-25', 'Paulo@gmail.com', '11935466554','98065576
+324');
+Query OK, 1 row affected (0.025 sec)
+
+MariaDB [jornal]> insert into noticias (titulonoticia, descricao, data, redator,
+ categoria) VALUES
+    -> ('Acidente Grave em Mauá', 'Jovem foi atropelado por um ônibus na Avenida
+ Barão de Mauã enquanto atravessava a rua', '2026-06-10', 1, 'Infomativa'),
+    -> ('Dinheiro e Ingratidão', 'Morador de rua encontrou R$1000 em dinheiro na
+ rua e devolveu ao dono, porém dono nem mesmo o agradeceu', '2026-06-10', 1, 'In
+fomativa'),
+    -> ('Opinião Forte de Flávio', 'Todos os políticos deveriam ser presos - Diz
+ Flávio noim em entrevista para a rede Globo', '2026-06-10', 1, 'Opinativa');
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint f
+ails (`jornal`.`noticias`, CONSTRAINT `noticias_ibfk_2` FOREIGN KEY (`categoria`
+) REFERENCES `categorias` (`idcategoria`))
+MariaDB [jornal]> insert into noticias (titulonoticia, descricao, data, redator,
+ categoria) VALUES
+    -> ('Acidente Grave em Mauá', 'Jovem foi atropelado por um ônibus na Avenida
+ Barão de Mauã enquanto atravessava a rua', '2026-06-10', 1, 1),
+    -> ('Dinheiro e Ingratidão', 'Morador de rua encontrou R$1000 em dinheiro na
+ rua e devolveu ao dono, porém dono nem mesmo o agradeceu', '2026-06-10', 1, 1),
+
+    -> ('Opinião Forte de Flávio', 'Todos os políticos deveriam ser presos - Diz
+ Flávio noim em entrevista para a rede Globo', '2026-06-10', 1, 3);
+Query OK, 3 rows affected (0.029 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+MariaDB [jornal]>
