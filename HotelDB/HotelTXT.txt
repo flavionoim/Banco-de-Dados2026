@@ -1,0 +1,78 @@
+create table cliente (
+	codcliente int PRIMARY KEY AUTO_INCREMENT,
+	cliente varchar(255) not null,
+	email varchar(100) UNIQUE not null, 
+	cpf varchar(255) UNIQUE not null);
+
+create table quarto (
+	codquarto int PRIMARY KEY AUTO_INCREMENT,
+	quarto varchar(255) not null,
+	andar varchar(100) UNIQUE not null, 
+	tipo varchar(100) UNIQUE not null);
+
+create table servico (
+	codservico int PRIMARY KEY AUTO_INCREMENT,
+	servico varchar(255) not null,
+	qtde int not null, 
+	valor decimal(7,2) not null,
+	tipo varchar(50) not null);
+    
+create table hospedagem (
+	idhospedagem int PRIMARY KEY AUTO_INCREMENT,
+	dataentrada date not null,
+	datasaida date, 
+	horaentrada time not null,
+    horasaida time,
+	totalhospedagem decimal(7,2),
+	codcli int,
+	codquarto int,
+    FOREIGN KEY (codcli) REFERENCES cliente(codcliente),
+    FOREIGN KEY (codquarto) REFERENCES quarto(codquarto));
+
+	
+
+
+
+
+
+
+INSERT INTO cliente (cliente,cpf,email) values 
+('Flávio Gustavo', '564.880.086-76', 'flavio@gmail.com'),
+('Pedro Henrique', '544.890.087-66', 'pedro@gmail.com'),
+('Paulo Gustavo', '574.880.089-67', 'paulo@gmail.com'),
+('Joao Cleber', '514.880.086-76', 'joao@gmail.com'),
+('Ademar Coelho', '564.810.086-76', 'ademar@gmail.com'),
+('Wemerson Filho', '564.880.586-76', 'wemerson@gmail.com'),
+
+
+
+INSERT INTO quarto (andar,quarto,tipo) values 
+('1°Andar', '1', 'Suite'),
+('4°Andar', '2', 'King'),
+('2°Andar', '10', 'Presidencial'),
+('3°Andar', '3', 'Uma Cama'),
+('5°Andar', '4', 'Suite'),
+('Cobertura', '15', 'Presidencial');
+
+
+
+INSERT INTO quarto (andar,quarto,tipo) values 
+('1°Andar', '1', 'Suite'),
+('4°Andar', '2', 'King'),
+('2°Andar', '10', 'Presidencial'),
+('3°Andar', '3', 'Uma Cama'),
+('5°Andar', '4', 'Duas Camas'),
+('Cobertura', '15', 'Presidencial');
+
+
+INSERT INTO serivo (servico,tipo,valor) values 
+('Pepsi Lata 600ml', 'Bebida', 8.50),
+('Salgadinho Pringles 300g', 'Comida', 12.90),
+('Hersheys 100g', 'Comida', 5.00),
+('Salgadinho Pippos 500g', 'Comida', 3.50),
+('Vinho Tinto 1L', 'Bebida', 30.00),
+('Champagne', 'Bebida', 32.00),
+('Petit Gateau', 'Comida', 50.00);
+
+
+
