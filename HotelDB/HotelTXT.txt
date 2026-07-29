@@ -65,7 +65,7 @@ INSERT INTO quarto (andar,quarto,tipo) values
 ('Cobertura', '15', 'Presidencial');
 
 
-INSERT INTO serivo (servico,tipo,valor) values 
+INSERT INTO servico (servico,tipo,valor) values 
 ('Pepsi Lata 600ml', 'Bebida', 8.50),
 ('Salgadinho Pringles 300g', 'Comida', 12.90),
 ('Hersheys 100g', 'Comida', 5.00),
