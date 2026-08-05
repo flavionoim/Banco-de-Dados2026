@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 29-Jul-2026 às 22:51
+-- Tempo de geração: 05/08/2026 às 22:43
 -- Versão do servidor: 10.4.28-MariaDB
--- versão do PHP: 8.2.4
+-- Versão do PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -26,7 +26,7 @@ USE `hotel`;
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `cliente`
+-- Estrutura para tabela `cliente`
 --
 
 CREATE TABLE `cliente` (
@@ -37,7 +37,7 @@ CREATE TABLE `cliente` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `cliente`
+-- Despejando dados para a tabela `cliente`
 --
 
 INSERT INTO `cliente` (`codcliente`, `cliente`, `email`, `cpf`) VALUES
@@ -51,7 +51,7 @@ INSERT INTO `cliente` (`codcliente`, `cliente`, `email`, `cpf`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `hospedagem`
+-- Estrutura para tabela `hospedagem`
 --
 
 CREATE TABLE `hospedagem` (
@@ -65,10 +65,22 @@ CREATE TABLE `hospedagem` (
   `codquarto` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Despejando dados para a tabela `hospedagem`
+--
+
+INSERT INTO `hospedagem` (`idhospedagem`, `dataentrada`, `datasaida`, `horaentrada`, `horasaida`, `totalhospedagem`, `codcli`, `codquarto`) VALUES
+(4, '2026-08-01', NULL, '16:55:00', NULL, NULL, 1, 13),
+(5, '2026-07-08', NULL, '09:30:00', NULL, NULL, 2, 14),
+(6, '2026-07-30', NULL, '12:03:00', NULL, NULL, 3, 16),
+(7, '2026-07-14', NULL, '19:04:00', NULL, NULL, 4, 17),
+(8, '2026-08-24', NULL, '11:05:00', NULL, NULL, 5, 15),
+(9, '2026-08-02', NULL, '07:15:00', NULL, NULL, 6, 18);
+
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `quarto`
+-- Estrutura para tabela `quarto`
 --
 
 CREATE TABLE `quarto` (
@@ -79,7 +91,7 @@ CREATE TABLE `quarto` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `quarto`
+-- Despejando dados para a tabela `quarto`
 --
 
 INSERT INTO `quarto` (`codquarto`, `quarto`, `andar`, `tipo`) VALUES
@@ -93,7 +105,7 @@ INSERT INTO `quarto` (`codquarto`, `quarto`, `andar`, `tipo`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `servico`
+-- Estrutura para tabela `servico`
 --
 
 CREATE TABLE `servico` (
@@ -105,7 +117,7 @@ CREATE TABLE `servico` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `servico`
+-- Despejando dados para a tabela `servico`
 --
 
 INSERT INTO `servico` (`codservico`, `servico`, `qtde`, `valor`, `tipo`) VALUES
@@ -120,7 +132,7 @@ INSERT INTO `servico` (`codservico`, `servico`, `qtde`, `valor`, `tipo`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `servicohospedagem`
+-- Estrutura para tabela `servicohospedagem`
 --
 
 CREATE TABLE `servicohospedagem` (
@@ -132,11 +144,42 @@ CREATE TABLE `servicohospedagem` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- Despejando dados para a tabela `servicohospedagem`
+--
+
+INSERT INTO `servicohospedagem` (`idhospedagem`, `idservico`, `dataservico`, `horaservico`, `total`) VALUES
+(4, 1, '2026-08-02', '14:13:00', NULL),
+(4, 7, '2026-08-02', '16:40:12', NULL),
+(4, 4, '2026-08-02', '17:19:00', NULL),
+(4, 3, '2026-08-02', '23:40:12', NULL),
+(4, 5, '2026-08-03', '07:10:34', NULL),
+(5, 1, '2026-07-08', '10:40:00', NULL),
+(5, 2, '2026-07-08', '12:10:00', NULL),
+(5, 3, '2026-07-08', '14:20:00', NULL),
+(5, 6, '2026-07-09', '05:20:00', NULL),
+(5, 4, '2026-07-09', '10:11:01', NULL),
+(6, 5, '2026-07-30', '20:13:00', NULL),
+(6, 6, '2026-07-30', '21:10:00', NULL),
+(6, 1, '2026-07-31', '04:10:12', NULL),
+(6, 7, '2026-07-31', '10:02:00', NULL),
+(6, 2, '2026-07-31', '15:00:00', NULL),
+(7, 7, '2026-07-14', '22:18:00', NULL),
+(7, 3, '2026-07-14', '23:07:10', NULL),
+(7, 2, '2026-07-14', '23:58:59', NULL),
+(7, 5, '2026-07-15', '02:21:00', NULL),
+(7, 6, '2026-07-15', '04:32:00', NULL),
+(8, 2, '2026-08-24', '11:59:00', NULL),
+(8, 7, '2026-08-24', '12:57:21', NULL),
+(8, 5, '2026-08-24', '14:30:00', NULL),
+(8, 4, '2026-08-24', '15:20:03', NULL),
+(8, 4, '2026-08-24', '16:12:02', NULL);
+
+--
 -- Índices para tabelas despejadas
 --
 
 --
--- Índices para tabela `cliente`
+-- Índices de tabela `cliente`
 --
 ALTER TABLE `cliente`
   ADD PRIMARY KEY (`codcliente`),
@@ -144,7 +187,7 @@ ALTER TABLE `cliente`
   ADD UNIQUE KEY `cpf` (`cpf`);
 
 --
--- Índices para tabela `hospedagem`
+-- Índices de tabela `hospedagem`
 --
 ALTER TABLE `hospedagem`
   ADD PRIMARY KEY (`idhospedagem`),
@@ -152,7 +195,7 @@ ALTER TABLE `hospedagem`
   ADD KEY `codquarto` (`codquarto`);
 
 --
--- Índices para tabela `quarto`
+-- Índices de tabela `quarto`
 --
 ALTER TABLE `quarto`
   ADD PRIMARY KEY (`codquarto`);
@@ -160,20 +203,20 @@ ALTER TABLE `quarto` ADD FULLTEXT KEY `andar` (`andar`);
 ALTER TABLE `quarto` ADD FULLTEXT KEY `tipo` (`tipo`);
 
 --
--- Índices para tabela `servico`
+-- Índices de tabela `servico`
 --
 ALTER TABLE `servico`
   ADD PRIMARY KEY (`codservico`);
 
 --
--- Índices para tabela `servicohospedagem`
+-- Índices de tabela `servicohospedagem`
 --
 ALTER TABLE `servicohospedagem`
   ADD KEY `idhospedagem` (`idhospedagem`),
   ADD KEY `idservico` (`idservico`);
 
 --
--- AUTO_INCREMENT de tabelas despejadas
+-- AUTO_INCREMENT para tabelas despejadas
 --
 
 --
@@ -186,7 +229,7 @@ ALTER TABLE `cliente`
 -- AUTO_INCREMENT de tabela `hospedagem`
 --
 ALTER TABLE `hospedagem`
-  MODIFY `idhospedagem` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idhospedagem` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de tabela `quarto`
@@ -201,18 +244,18 @@ ALTER TABLE `servico`
   MODIFY `codservico` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- Restrições para despejos de tabelas
+-- Restrições para tabelas despejadas
 --
 
 --
--- Limitadores para a tabela `hospedagem`
+-- Restrições para tabelas `hospedagem`
 --
 ALTER TABLE `hospedagem`
   ADD CONSTRAINT `hospedagem_ibfk_1` FOREIGN KEY (`codcli`) REFERENCES `cliente` (`codcliente`),
   ADD CONSTRAINT `hospedagem_ibfk_2` FOREIGN KEY (`codquarto`) REFERENCES `quarto` (`codquarto`);
 
 --
--- Limitadores para a tabela `servicohospedagem`
+-- Restrições para tabelas `servicohospedagem`
 --
 ALTER TABLE `servicohospedagem`
   ADD CONSTRAINT `servicohospedagem_ibfk_1` FOREIGN KEY (`idhospedagem`) REFERENCES `hospedagem` (`idhospedagem`),
