@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 05/08/2026 às 22:43
+-- Tempo de geração: 12/08/2026 às 22:52
 -- Versão do servidor: 10.4.28-MariaDB
 -- Versão do PHP: 8.2.4
 
@@ -41,10 +41,10 @@ CREATE TABLE `cliente` (
 --
 
 INSERT INTO `cliente` (`codcliente`, `cliente`, `email`, `cpf`) VALUES
-(1, 'Flávio Gustavo', 'flavio@gmail.com', '564.880.086-76'),
+(1, 'Flávio Gustavo', 'flavionoim@gmail.com', '564.880.086-76'),
 (2, 'Pedro Henrique', 'pedro@gmail.com', '544.890.087-66'),
 (3, 'Paulo Gustavo', 'paulo@gmail.com', '574.880.089-67'),
-(4, 'Joao Cleber', 'joao@gmail.com', '514.880.086-76'),
+(4, 'João Cleber', 'joao@gmail.com', '514.880.086-76'),
 (5, 'Ademar Coelho', 'ademar@gmail.com', '564.810.086-76'),
 (6, 'Wemerson Filho', 'wemerson@gmail.com', '564.880.586-76');
 
@@ -70,7 +70,7 @@ CREATE TABLE `hospedagem` (
 --
 
 INSERT INTO `hospedagem` (`idhospedagem`, `dataentrada`, `datasaida`, `horaentrada`, `horasaida`, `totalhospedagem`, `codcli`, `codquarto`) VALUES
-(4, '2026-08-01', NULL, '16:55:00', NULL, NULL, 1, 13),
+(4, '2026-08-01', '2026-08-12', '16:55:00', '17:36:00', NULL, 1, 13),
 (5, '2026-07-08', NULL, '09:30:00', NULL, NULL, 2, 14),
 (6, '2026-07-30', NULL, '12:03:00', NULL, NULL, 3, 16),
 (7, '2026-07-14', NULL, '19:04:00', NULL, NULL, 4, 17),
@@ -95,7 +95,7 @@ CREATE TABLE `quarto` (
 --
 
 INSERT INTO `quarto` (`codquarto`, `quarto`, `andar`, `tipo`) VALUES
-(13, '1', '1°Andar', 'Suite'),
+(13, '1', '1°Andar', 'Suíte Master'),
 (14, '2', '4°Andar', 'King'),
 (15, '10', '2°Andar', 'Presidencial'),
 (16, '3', '3°Andar', 'Uma Cama'),
@@ -126,8 +126,9 @@ INSERT INTO `servico` (`codservico`, `servico`, `qtde`, `valor`, `tipo`) VALUES
 (3, 'Hersheys 100g', 0, 5.00, 'Comida'),
 (4, 'Salgadinho Pippos 500g', 0, 3.50, 'Comida'),
 (5, 'Vinho Tinto 1L', 0, 30.00, 'Bebida'),
-(6, 'Champagne', 0, 32.00, 'Bebida'),
-(7, 'Petit Gateau', 0, 50.00, 'Comida');
+(6, 'Champagne', 0, 63.00, 'Bebida'),
+(7, 'Petit Gateau', 0, 50.00, 'Comida'),
+(8, 'Picanha Na Brasa', 0, 60.00, 'Comida');
 
 -- --------------------------------------------------------
 
@@ -148,7 +149,6 @@ CREATE TABLE `servicohospedagem` (
 --
 
 INSERT INTO `servicohospedagem` (`idhospedagem`, `idservico`, `dataservico`, `horaservico`, `total`) VALUES
-(4, 1, '2026-08-02', '14:13:00', NULL),
 (4, 7, '2026-08-02', '16:40:12', NULL),
 (4, 4, '2026-08-02', '17:19:00', NULL),
 (4, 3, '2026-08-02', '23:40:12', NULL),
@@ -241,7 +241,7 @@ ALTER TABLE `quarto`
 -- AUTO_INCREMENT de tabela `servico`
 --
 ALTER TABLE `servico`
-  MODIFY `codservico` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `codservico` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Restrições para tabelas despejadas
