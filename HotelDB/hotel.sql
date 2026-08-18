@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 14/08/2026 às 22:52
--- Versão do servidor: 10.4.28-MariaDB
--- Versão do PHP: 8.2.4
+-- Tempo de geração: 18-Ago-2026 às 19:14
+-- Versão do servidor: 10.4.22-MariaDB
+-- versão do PHP: 8.1.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -26,7 +26,7 @@ USE `hotel`;
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `cliente`
+-- Estrutura da tabela `cliente`
 --
 
 CREATE TABLE `cliente` (
@@ -34,10 +34,10 @@ CREATE TABLE `cliente` (
   `cliente` varchar(255) NOT NULL,
   `email` varchar(100) NOT NULL,
   `cpf` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Despejando dados para a tabela `cliente`
+-- Extraindo dados da tabela `cliente`
 --
 
 INSERT INTO `cliente` (`codcliente`, `cliente`, `email`, `cpf`) VALUES
@@ -51,7 +51,7 @@ INSERT INTO `cliente` (`codcliente`, `cliente`, `email`, `cpf`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `hospedagem`
+-- Estrutura da tabela `hospedagem`
 --
 
 CREATE TABLE `hospedagem` (
@@ -63,49 +63,51 @@ CREATE TABLE `hospedagem` (
   `totalhospedagem` decimal(7,2) DEFAULT NULL,
   `codcli` int(11) DEFAULT NULL,
   `codquarto` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Despejando dados para a tabela `hospedagem`
+-- Extraindo dados da tabela `hospedagem`
 --
 
 INSERT INTO `hospedagem` (`idhospedagem`, `dataentrada`, `datasaida`, `horaentrada`, `horasaida`, `totalhospedagem`, `codcli`, `codquarto`) VALUES
-(4, '2026-08-01', '2026-08-12', '16:55:00', '17:36:00', NULL, 1, 13),
-(5, '2026-07-08', NULL, '09:30:00', NULL, NULL, 2, 14),
-(6, '2026-07-30', NULL, '12:03:00', NULL, NULL, 3, 16),
-(7, '2026-07-14', NULL, '19:04:00', NULL, NULL, 4, 17),
-(8, '2026-08-24', NULL, '11:05:00', NULL, NULL, 5, 15),
-(9, '2026-08-02', NULL, '07:15:00', NULL, NULL, 6, 18);
+(4, '2026-08-01', '2026-08-12', '16:55:00', '17:36:00', '88.50', 1, 13),
+(5, '2026-07-08', NULL, '09:30:00', NULL, '92.90', 2, 14),
+(6, '2026-07-30', NULL, '12:03:00', NULL, '164.40', 3, 16),
+(7, '2026-07-14', NULL, '19:04:00', NULL, '160.90', 4, 17),
+(8, '2026-08-24', NULL, '11:05:00', NULL, '99.90', 5, 15),
+(9, '2026-08-02', NULL, '07:15:00', NULL, '0.00', 6, 18);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `quarto`
+-- Estrutura da tabela `quarto`
 --
 
 CREATE TABLE `quarto` (
   `codquarto` int(11) NOT NULL,
   `quarto` varchar(255) NOT NULL,
   `andar` varchar(100) NOT NULL,
-  `tipo` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  `tipo` varchar(100) NOT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Despejando dados para a tabela `quarto`
+-- Extraindo dados da tabela `quarto`
 --
 
-INSERT INTO `quarto` (`codquarto`, `quarto`, `andar`, `tipo`) VALUES
-(13, '1', '1°Andar', 'Suíte Master'),
-(14, '2', '4°Andar', 'King'),
-(15, '10', '2°Andar', 'Presidencial'),
-(16, '3', '3°Andar', 'Uma Cama'),
-(17, '4', '5°Andar', 'Duas Camas'),
-(18, '15', 'Cobertura', 'Presidencial');
+INSERT INTO `quarto` (`codquarto`, `quarto`, `andar`, `tipo`, `status`) VALUES
+(13, '1', '1°Andar', 'Suíte Master', 1),
+(14, '2', '4°Andar', 'King', 1),
+(15, '10', '2°Andar', 'Presidencial', 1),
+(16, '3', '3°Andar', 'Uma Cama', 1),
+(17, '4', '5°Andar', 'Duas Camas', 1),
+(18, '15', 'Cobertura', 'Presidencial', 1),
+(20, '5', '2°Andar', '2 Camas', 0);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `servico`
+-- Estrutura da tabela `servico`
 --
 
 CREATE TABLE `servico` (
@@ -114,26 +116,26 @@ CREATE TABLE `servico` (
   `qtde` int(11) NOT NULL,
   `valor` decimal(7,2) NOT NULL,
   `tipo` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Despejando dados para a tabela `servico`
+-- Extraindo dados da tabela `servico`
 --
 
 INSERT INTO `servico` (`codservico`, `servico`, `qtde`, `valor`, `tipo`) VALUES
-(1, 'Pepsi Lata 600ml', 0, 8.50, 'Bebida'),
-(2, 'Salgadinho Pringles 300g', 0, 12.90, 'Comida'),
-(3, 'Hersheys 100g', 0, 5.00, 'Comida'),
-(4, 'Salgadinho Pippos 500g', 0, 3.50, 'Comida'),
-(5, 'Vinho Tinto 1L', 0, 30.00, 'Bebida'),
-(6, 'Champagne', 0, 63.00, 'Bebida'),
-(7, 'Petit Gateau', 0, 50.00, 'Comida'),
-(8, 'Picanha Na Brasa', 0, 60.00, 'Comida');
+(1, 'Pepsi Lata 600ml', 0, '8.50', 'Bebida'),
+(2, 'Salgadinho Pringles 300g', 0, '12.90', 'Comida'),
+(3, 'Hersheys 100g', 0, '5.00', 'Comida'),
+(4, 'Salgadinho Pippos 500g', 0, '3.50', 'Comida'),
+(5, 'Vinho Tinto 1L', 0, '30.00', 'Bebida'),
+(6, 'Champagne', 0, '63.00', 'Bebida'),
+(7, 'Petit Gateau', 0, '50.00', 'Comida'),
+(8, 'Picanha Na Brasa', 0, '60.00', 'Comida');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `servicohospedagem`
+-- Estrutura da tabela `servicohospedagem`
 --
 
 CREATE TABLE `servicohospedagem` (
@@ -142,10 +144,10 @@ CREATE TABLE `servicohospedagem` (
   `dataservico` date DEFAULT NULL,
   `horaservico` time DEFAULT NULL,
   `total` decimal(7,2) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Despejando dados para a tabela `servicohospedagem`
+-- Extraindo dados da tabela `servicohospedagem`
 --
 
 INSERT INTO `servicohospedagem` (`idhospedagem`, `idservico`, `dataservico`, `horaservico`, `total`) VALUES
@@ -179,7 +181,7 @@ INSERT INTO `servicohospedagem` (`idhospedagem`, `idservico`, `dataservico`, `ho
 --
 
 --
--- Índices de tabela `cliente`
+-- Índices para tabela `cliente`
 --
 ALTER TABLE `cliente`
   ADD PRIMARY KEY (`codcliente`),
@@ -187,7 +189,7 @@ ALTER TABLE `cliente`
   ADD UNIQUE KEY `cpf` (`cpf`);
 
 --
--- Índices de tabela `hospedagem`
+-- Índices para tabela `hospedagem`
 --
 ALTER TABLE `hospedagem`
   ADD PRIMARY KEY (`idhospedagem`),
@@ -195,7 +197,7 @@ ALTER TABLE `hospedagem`
   ADD KEY `codquarto` (`codquarto`);
 
 --
--- Índices de tabela `quarto`
+-- Índices para tabela `quarto`
 --
 ALTER TABLE `quarto`
   ADD PRIMARY KEY (`codquarto`);
@@ -203,20 +205,20 @@ ALTER TABLE `quarto` ADD FULLTEXT KEY `andar` (`andar`);
 ALTER TABLE `quarto` ADD FULLTEXT KEY `tipo` (`tipo`);
 
 --
--- Índices de tabela `servico`
+-- Índices para tabela `servico`
 --
 ALTER TABLE `servico`
   ADD PRIMARY KEY (`codservico`);
 
 --
--- Índices de tabela `servicohospedagem`
+-- Índices para tabela `servicohospedagem`
 --
 ALTER TABLE `servicohospedagem`
   ADD KEY `idhospedagem` (`idhospedagem`),
   ADD KEY `idservico` (`idservico`);
 
 --
--- AUTO_INCREMENT para tabelas despejadas
+-- AUTO_INCREMENT de tabelas despejadas
 --
 
 --
@@ -235,7 +237,7 @@ ALTER TABLE `hospedagem`
 -- AUTO_INCREMENT de tabela `quarto`
 --
 ALTER TABLE `quarto`
-  MODIFY `codquarto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `codquarto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de tabela `servico`
@@ -244,18 +246,18 @@ ALTER TABLE `servico`
   MODIFY `codservico` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
--- Restrições para tabelas despejadas
+-- Restrições para despejos de tabelas
 --
 
 --
--- Restrições para tabelas `hospedagem`
+-- Limitadores para a tabela `hospedagem`
 --
 ALTER TABLE `hospedagem`
   ADD CONSTRAINT `hospedagem_ibfk_1` FOREIGN KEY (`codcli`) REFERENCES `cliente` (`codcliente`),
   ADD CONSTRAINT `hospedagem_ibfk_2` FOREIGN KEY (`codquarto`) REFERENCES `quarto` (`codquarto`);
 
 --
--- Restrições para tabelas `servicohospedagem`
+-- Limitadores para a tabela `servicohospedagem`
 --
 ALTER TABLE `servicohospedagem`
   ADD CONSTRAINT `servicohospedagem_ibfk_1` FOREIGN KEY (`idhospedagem`) REFERENCES `hospedagem` (`idhospedagem`),
